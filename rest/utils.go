@@ -2,10 +2,11 @@ package rest
 
 import (
 	"encoding/json"
-	"golang.org/x/net/publicsuffix"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"golang.org/x/net/publicsuffix"
 )
 
 // mimicing NotFound: https://golang.org/src/net/http/server.go?s=64787:64830#L2076
@@ -60,12 +61,12 @@ var (
 	// SiloDomains are domains where mentions of multiple individuals may come from.
 	// These are privacy issues and will be anonymized as such.
 	SiloDomains = []string{
-		"brid.gy",
-		"brid-gy.appspot.com",
-		"twitter.com",
-		"facebook.com",
-		"indieweb.social",
-		"mastodon.social",
+		// "brid.gy",
+		// "brid-gy.appspot.com",
+		// "twitter.com",
+		// "facebook.com",
+		// "indieweb.social",
+		// "mastodon.social",
 	}
 )
 
