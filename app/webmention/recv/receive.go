@@ -1,15 +1,16 @@
 package recv
 
 import (
+	"errors"
+	"fmt"
+	"regexp"
+	"strings"
+
 	"brainbaking.com/go-jamming/app/mf"
 	"brainbaking.com/go-jamming/app/notifier"
 	"brainbaking.com/go-jamming/common"
 	"brainbaking.com/go-jamming/db"
 	"brainbaking.com/go-jamming/rest"
-	"errors"
-	"fmt"
-	"regexp"
-	"strings"
 
 	"github.com/rs/zerolog/log"
 	"willnorris.com/go/microformats"
@@ -156,6 +157,7 @@ func (recv *Receiver) parseBodyAsNonIndiewebSite(body string, wm mf.Mention) *mf
 // If strict is true, this refuses to download from silo sources such as brid.gy because of privacy concerns.
 func (recv *Receiver) saveAuthorPictureLocally(indieweb *mf.IndiewebData) error {
 	srcDomain := rest.Domain(indieweb.Source)
+	srcAuthor := indieweb.Author.Name
 	if common.Includes(rest.SiloDomains, srcDomain) {
 		return errWontDownloadBecauseOfPrivacy
 	}
@@ -168,12 +170,12 @@ func (recv *Receiver) saveAuthorPictureLocally(indieweb *mf.IndiewebData) error 
 		return errPicNoRealImage
 	}
 
-	_, dberr := recv.Repo.SavePicture(picData, srcDomain)
+	_, dberr := recv.Repo.SavePicture(picData, srcAuthor)
 	if dberr != nil {
 		return errPicUnableToSave
 	}
 
-	indieweb.Author.Picture = fmt.Sprintf("/pictures/%s", srcDomain)
+	indieweb.Author.Picture = fmt.Sprintf("/pictures/%s", srcAuthor)
 	return nil
 }
 
