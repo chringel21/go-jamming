@@ -1,10 +1,11 @@
 package mf
 
 import (
-	"brainbaking.com/go-jamming/common"
 	"fmt"
 	"strings"
 	"time"
+
+	"brainbaking.com/go-jamming/common"
 	"willnorris.com/go/microformats"
 )
 
@@ -236,6 +237,7 @@ const (
 	TypeLike     MfType = "like"
 	TypeBookmark MfType = "bookmark"
 	TypeMention  MfType = "mention"
+	TypeRepost	 MfType = "repost"
 )
 
 func Type(hEntry *microformats.Microformat) MfType {
@@ -246,6 +248,10 @@ func Type(hEntry *microformats.Microformat) MfType {
 	bookmarkOf := Str(hEntry, "bookmark-of")
 	if bookmarkOf != "" {
 		return TypeBookmark
+	}
+	repostOf := Str(hEntry, "repost-of")
+	if repostOf != "" {
+		return TypeRepost
 	}
 	return TypeMention
 }
