@@ -64,7 +64,7 @@ var (
 		// "brid.gy",
 		// "brid-gy.appspot.com",
 		// "twitter.com",
-		// "facebook.com",
+		"facebook.com",
 		// "indieweb.social",
 		// "mastodon.social",
 	}
