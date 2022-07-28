@@ -241,19 +241,19 @@ const (
 )
 
 func Type(hEntry *microformats.Microformat) MfType {
-	hType := Str(hEntry, "u-like-of")
+	hType := Str(hEntry, "like-of")
 	if hType != "" {
 		return TypeLike
 	}
-	hType = Str(hEntry, "u-bookmark-of")
+	hType = Str(hEntry, "bookmark-of")
 	if hType != "" {
 		return TypeBookmark
 	}
-	hType = Str(hEntry, "u-repost-of")
+	hType = Str(hEntry, "repost-of")
 	if hType != "" {
 		return TypeRepost
 	}
-	hType = Str(hEntry, "u-in-reply-to")
+	hType = Str(hEntry, "in-reply-to")
 	if hType != "" {
 		return TypeReply
 	}
